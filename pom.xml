@@ -10,6 +10,7 @@
 
     <properties>
         <commons-lang3.version>3.2.1</commons-lang3.version>
+        <mail.version>1.4</mail.version>
     </properties>
 
     <dependencyManagement>
@@ -19,6 +20,12 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -27,6 +34,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,10 +1,7 @@
 package com.jags.explore.java.threads;
 
 
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 /*
 * In computing, the producer–consumer problem (also known as the bounded-buffer problem) is a classic example of a
@@ -18,17 +15,32 @@ import java.util.Random;
 public class ProducerConsumer {
 
 
+  public static final int QUEUE_SIZE = 5;
   public static void main (String... args) throws InterruptedException {
 
+//    List<String> sharedList = new ArrayList<String>();
     Queue<String> sharedQueue = new ArrayDeque<String>();
     Thread producerThread = new Thread(new Producer(sharedQueue));
     Thread consumerThread = new Thread(new Consumer(sharedQueue)) ;
-    Thread consumerThread2 = new Thread(new Consumer(sharedQueue)) ;
+    producerThread.start();
+    consumerThread.start();
+//    producerThread.join();
+//    consumerThread.join();
+    System.out.println("Waiting for threads to finish");
+
+
+/*
+    Queue<String> sharedQueue = new ArrayDeque<String>();
+
+
+    Thread producerThread = new Thread(new Producer(sharedQueue));
+    Thread consumerThread = new Thread(new Consumer(sharedQueue)) ;
     consumerThread.start();
     producerThread.start();
-    consumerThread2.start();
     producerThread.join();
     consumerThread.join();
+    System.out.println("Waiting for threads to finish");
+*/
 
   }
 }
@@ -43,11 +55,32 @@ class Producer implements Runnable {
 
   @Override
   public void run() {
-    produce();
+    for (int i = 0; i < 11; i++) {
+      produce("Adding: " + i);
+    }
   }
 
-  private void produce() {
+  private void produce(String value) {
+
+    while (sharedQueue.size() == ProducerConsumer.QUEUE_SIZE) {
+      System.out.println("Queue is full. Wait for it to be freed..");
+      synchronized (sharedQueue) {
+        try {
+          sharedQueue.wait();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    System.out.println("Queue is not full.. " + value);
     synchronized (sharedQueue) {
+      sharedQueue.add(value);
+      sharedQueue.notifyAll();
+    }
+  }
+/*
+    synchronized (sharedQueue) {
+
 
     while (sharedQueue.size() < 11) {
 //      System.out.println("inside..");
@@ -55,6 +88,7 @@ class Producer implements Runnable {
       int i = random.nextInt();
       System.out.println("Producing item " + i);
       sharedQueue.add("Item:" + i);
+*/
 
 /*
       if (sharedQueue.size() == 10) {
@@ -66,10 +100,8 @@ class Producer implements Runnable {
         }
       }
 */
-    }
-    notifyAll();
-  }
-}
+//    }
+//  }
 }
 
 class Consumer implements Runnable {
@@ -83,11 +115,35 @@ class Consumer implements Runnable {
 
   @Override
   public void run() {
-    consume();
+    while(true) {
+      consume();
+    }
   }
 
   private void consume() {
-    synchronized (sharedQueue) {
+
+    while (sharedQueue.isEmpty()) {
+      System.out.println("Waiting for queue to have some data..");
+      synchronized (sharedQueue) {
+        try {
+          sharedQueue.wait();
+          Thread.sleep(100);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+      synchronized (sharedQueue) {
+        System.out.println("Good to take data... " + sharedQueue.remove());
+        sharedQueue.notifyAll();
+      }
+
+    }
+  }
+
+
+
+
+   /* synchronized (sharedQueue) {
       if (sharedQueue.size() == 0) {
         System.out.println("Going to wait..");
         try {
@@ -98,7 +154,7 @@ class Consumer implements Runnable {
       }
     while (sharedQueue.size() > 0) {
       String  item = sharedQueue.poll();
-      System.out.println("                  " + item + " is consumed");
+      System.out.println("                  " + item + " is consumed");*/
 /*
       if (sharedQueue.isEmpty()) {
         try {
@@ -109,8 +165,8 @@ class Consumer implements Runnable {
       }
 */
 
-      }
-      sharedQueue.notifyAll();
-    }
-  }
+//      }
+//      sharedQueue.notifyAll();
+//    }
+//  }
 }

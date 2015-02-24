@@ -15,10 +15,21 @@ public class Producer implements Runnable {
 
   @Override
   public void run() {
-    int i = 10;
-    while (i < 10) {
-      sharedBlockingQueue.add("Adding .. " + i);
-    }
+    System.out.println("Am I here..");
 
+      try {
+        System.out.println("adding 1 ");
+        sharedBlockingQueue.put("1");
+//        Thread.sleep(1000);
+        System.out.println("adding 2 ");
+        sharedBlockingQueue.put("2");
+//        Thread.sleep(1000);
+        System.out.println("adding 3 ");
+        sharedBlockingQueue.put("3");
+        System.out.println("adding 4 ");
+        sharedBlockingQueue.put(null);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
   }
 }
