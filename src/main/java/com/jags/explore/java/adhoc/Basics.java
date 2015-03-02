@@ -19,8 +19,8 @@ public class Basics {
     final String[] split = path.split("((or)|(near))");
     System.out.println(split);
 
-
     List<String> list = new ArrayList<String>();
+    System.out.println(list.contains("New") + " : " + list.size());
     list.add("old");
     list.set(0, "Test");
   }

@@ -35,7 +35,7 @@ public class EmailValidator {
     Matcher matcher = pattern.matcher(email);
 
     if (matcher.matches()) {
-      System.out.println("Matches"); // Prints this for this email
+      System.out.println("Matches"); 
     }
     return matcher.matches();
   }
@@ -75,6 +75,8 @@ public class EmailValidator {
     System.out.println(EmailValidator.getDomainPattern());
     System.out.println(EmailValidator.isValidEmailDomain(email));
     System.out.println(EmailValidator.isValidEmailAddressSyntax(email));
+
+    System.out.println(EmailValidator.isValidEmailAddress(email));
     System.out.println(EmailValidator.isValidEmailAddress(email));
   }
 }
