@@ -37,6 +37,12 @@ public class ThreadLockTest {
     };
     t1.start();
 
+    try {
+      t1.join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
     new Thread() {
       public void run() {
         obj2.method2(obj1);

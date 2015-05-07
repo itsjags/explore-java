@@ -79,4 +79,8 @@ public class EmailValidator {
     System.out.println(EmailValidator.isValidEmailAddress(email));
     System.out.println(EmailValidator.isValidEmailAddress(email));
   }
+
+  private void testMethod() {
+
+  }
 }

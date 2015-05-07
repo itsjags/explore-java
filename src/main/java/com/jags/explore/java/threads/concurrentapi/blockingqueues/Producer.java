@@ -18,16 +18,17 @@ public class Producer implements Runnable {
     System.out.println("Am I here..");
 
       try {
-        System.out.println("adding 1 ");
         sharedBlockingQueue.put("1");
+        System.out.println("added 1 ");
 //        Thread.sleep(1000);
-        System.out.println("adding 2 ");
         sharedBlockingQueue.put("2");
+        System.out.println("added 2 ");
 //        Thread.sleep(1000);
-        System.out.println("adding 3 ");
         sharedBlockingQueue.put("3");
-        System.out.println("adding 4 ");
-        sharedBlockingQueue.put(null);
+        System.out.println("added 3 ");
+        sharedBlockingQueue.put("4");
+        System.out.println("added 4 ");
+
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

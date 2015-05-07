@@ -17,6 +17,7 @@ public class Consumer implements Runnable {
   public void run() {
     try {
       System.out.println("Taking.. ");
+      Thread.sleep(2000);
       System.out.println(sharedQueue.take());
       System.out.println(sharedQueue.take());
       System.out.println(sharedQueue.take());
