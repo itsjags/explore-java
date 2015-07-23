@@ -8,6 +8,7 @@ import java.util.List;
 
 public class RacingCondition {
 
+
   private List<String> list = new ArrayList<String>();
 
   class ProductRead implements Runnable {

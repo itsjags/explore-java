@@ -3,11 +3,9 @@ package com.jags.explore.java.adhoc;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Currency;
-import java.util.Locale;
-import java.util.StringTokenizer;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Test {
 
@@ -18,6 +16,11 @@ public class Test {
   public static void main(String a[]) throws UnsupportedEncodingException {
     String s = "&pound;" + 10.00;
     System.out.println(s);
+
+    Date date = Date.from(Instant.now());
+    System.out.println(date);
+
+//    LocalDate
 
     Locale locale = Locale.UK;
     Currency curr = Currency.getInstance(locale);
@@ -47,5 +50,16 @@ public class Test {
     System.out.println(st4.countTokens());
 
     DocumentBuilderFactory factory = null;
+
+    testLength();
+
   }
+
+  public static void testLength() {
+    String r = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 d d g\n" +
+        "ssdfsdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdffsdfasdfasdfasdfasd        end";
+
+    System.out.println(r.length());
+  }
+
 }
