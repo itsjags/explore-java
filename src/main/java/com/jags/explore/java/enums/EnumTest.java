@@ -10,5 +10,8 @@ public class EnumTest {
     System.out.println(Week.valueOf("FRIDAY"));
 
     Week week = Week.MONDAY;
+    System.out.println(Week.SUNDAY);
+    System.out.println(Week.MONDAY);
+    System.out.println(Week.TUESDAY.getWeather());
   }
 }
